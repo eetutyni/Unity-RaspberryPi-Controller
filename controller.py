@@ -1,5 +1,6 @@
 import socket
 import RPi.GPIO as GPIO
+from sense_hat import SenseHat
 from threading import Thread
 
 # Set up GPIO
@@ -7,7 +8,9 @@ GPIO.setmode(GPIO.BCM)
 LED_PIN = 18
 GPIO.setup(LED_PIN, GPIO.OUT)
 
-# Function to handle UDP discovery
+# Set up Sense HAT
+sense = SenseHat()
+
 def udp_discovery_server():
     udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     udp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -21,7 +24,6 @@ def udp_discovery_server():
             print(f"Discovery request from {address}")
             udp_socket.sendto("RASPBERRY_PI_RESPONSE".encode(), address)
 
-# Function to handle TCP commands
 def tcp_command_server():
     tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     tcp_socket.bind(('0.0.0.0', 5001))  # Listen on port 5001 for TCP
@@ -46,9 +48,12 @@ def handle_client(connection):
 
             if data == "LED_ON":
                 GPIO.output(LED_PIN, GPIO.HIGH)
+                sense.clear((0, 255, 0))  # Turn on Sense HAT LED matrix to green
+                sense.show_message("Connected", scroll_speed=0.05, text_colour=[255, 255, 255])
                 connection.send("LED turned ON".encode())
             elif data == "LED_OFF":
                 GPIO.output(LED_PIN, GPIO.LOW)
+                sense.clear()  # Turn off Sense HAT LED matrix
                 connection.send("LED turned OFF".encode())
             else:
                 connection.send("Unknown command!".encode())
