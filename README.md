@@ -7,6 +7,8 @@ A Unity based application for discovering, connecting to, and controlling Raspbe
 - **Connection Management**: Establishes and maintains TCP connections with selected Raspberry Pi devices.
 - **LED Control**: Sends commands to turn an LED on or off remotely. Can also be expanded to other commands, LED on/off is just an example.
 - **UI**: Displays discovered devices and updates their connection status in real time.
+- **Sensors** Gets humidity, temperature and pressure from the Pi's to the apps UI, this uses Sense Hat.
+- **Relay function** Can send sensor data from Pi to other Pi and display it on the Sense Hat matrix
 
 ## How It Works
 1. The application sends a UDP broadcast (`DISCOVER_RASPBERRY_PI`) to detect Raspberry Pis.
