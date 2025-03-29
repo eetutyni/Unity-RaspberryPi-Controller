@@ -1,6 +1,6 @@
 ## Raspberry Pi Controller - Unity
 
-A Unity based application for discovering, connecting to, and controlling Raspberry Pi devices over a local network. This project allows users to detect available Raspberry Pis, connect via TCP, and toggle an LED on/off via a simple UI.
+A Unity based application for discovering, connecting to, and controlling Raspberry Pi devices over a local network. This project allows users to detect available Raspberry Pi's, connect via TCP, and toggle an SenseHat matrix on/off, read sensor data from Rapsberry Pi's Sensehat module and relay that data to show it up on other Raspberry Pi's SenseHat matrix.
 
 ## Features
 - **Auto Discovery**: Broadcasts a UDP message to find Raspberry Pis running a compatible listener.
